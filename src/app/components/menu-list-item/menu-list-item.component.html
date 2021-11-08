@@ -1,0 +1,52 @@
+<a
+  mat-list-item
+  [ngStyle]="{ padding: depth * 12 + 'px' }"
+  (click)="onItemSelected(item)"
+  [ngClass]="{
+    expanded: isSidenavExpanded || isSidenavShowing,
+    collapse: !(isSidenavExpanded || isSidenavShowing),
+    'father-selected__icon':
+      isFatherSelected && (isSidenavExpanded || isSidenavShowing)
+  }"
+  class="menu-list"
+>
+  <div
+    class="father__icon"
+    [ngClass]="{
+      'father__icon-selected':
+        isFatherSelected && !(isSidenavExpanded || isSidenavShowing)
+    }"
+  >
+    <img
+      class="mat-icon notranslate material-icons mat-icon-no-color"
+      [src]="'assets/icons_sidebar/' + item.icon + '.svg'"
+      alt=""
+    />
+  </div>
+  <span *ngIf="isSidenavExpanded || isSidenavShowing" class="routeText">
+    {{ getLabelByLanguaje(item.description) }}
+  </span>
+</a>
+
+<div *ngIf="isMenuExpanded && item.listArbolModulo">
+  <ul>
+    <li *ngFor="let child of item.listArbolModulo">
+      <a
+        *ngIf="child.nactived==0?true:false"
+        mat-list-item
+        class="menu-list__item-child"
+        [ngClass]="{
+          expanded: isMenuExpanded
+        }"
+        [routerLink]="child.routeAngular"
+        routerLinkActive="active"
+      >
+        <div *ngIf="isSidenavExpanded || isSidenavShowing">
+          <span class="routeText__child">
+            {{ getLabelByLanguaje(child.processName) }}
+          </span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

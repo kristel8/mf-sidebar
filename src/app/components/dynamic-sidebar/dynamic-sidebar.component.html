@@ -1,0 +1,8 @@
+<mat-nav-list ngClass="navoverlay" style="padding: 8px 5px 0px">
+  <app-menu-list-item
+    [isSidenavExpanded]="isExpanded"
+    [isSidenavShowing]="isShowing"
+    *ngFor="let item of menusConfig"
+    [item]="item"
+  ></app-menu-list-item>
+</mat-nav-list>
